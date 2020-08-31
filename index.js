@@ -1,6 +1,10 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+const markdown = require("./generateMarkdown");
+const generateMarkdown = require("./generateMarkdown");
+
+const writeFileAsync = util.promisify(fs.writeFile);
 
 
 // array of questions for user
@@ -39,7 +43,7 @@ const questions = [
     },
     {
         type: "input",
-        message: "What commant should be run to install dependencies?",
+        message: "What command should be run to install dependencies?",
         name: "install"
     },
     {
@@ -65,8 +69,23 @@ const questions = [
 
 
 // function that starts the program
-function init(){
-    return inquirer.prompt(questions)
+async function init(){
+    console.log("Generating README...")
+
+    try {
+        const response = await inquirer.prompt(questions);
+
+        const readme = generateMarkdown(response);
+
+        await writeFileAsync("README.md", readme);
+
+        console.log("Success!")
+    } catch (error) {
+        console.log(error)
+    }
+    
+    const readme = response.projectName
+    
 };
 
 init();
