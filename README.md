@@ -46,9 +46,9 @@
   
   ## Demonstration
   
-  ![](assets/READMEvid.gif)
+  ![](Assets/READMEvid.gif)
   
-  ![](assets/readme1.png)
-  ![](assets/readme2.png)
+  ![](Assets/readme1.png)
+  ![](Assets/readme2.png)
 
   
