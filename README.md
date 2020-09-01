@@ -45,9 +45,8 @@
   If you have any questions about the repo, open an issue or contact me directly at egomezfax19@gmail.com. You can find more of my work at [www.github.com/egome019](https://github.com/egome019)
   
   ## Demonstration
-  
-  ![](Assets/READMEvid.gif)
-  
+  [Click here](https://drive.google.com/file/d/178ud3lu5zfypH8ch97DcOCgWTki_OBzI/view) to view a short video demonstrating the process of answering the prompts in the terminal.
+  ![](Assets/TerminalReadme.png)
   ![](Assets/readme1.png)
   ![](Assets/readme2.png)
 
