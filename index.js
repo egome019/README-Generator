@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
-const markdown = require("./generateMarkdown");
 const generateMarkdown = require("./generateMarkdown");
 
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -37,8 +36,7 @@ const questions = [
             "MIT",
             "APACHE 2.0",
             "GPL 3.0",
-            "BSD 3",
-            "None"
+            "BSD 3"
         ]
     },
     {
@@ -73,9 +71,33 @@ async function init(){
     console.log("Generating README...")
 
     try {
-        const response = await inquirer.prompt(questions);
+        const data = await inquirer.prompt(questions)
+        
 
-        const readme = generateMarkdown(response);
+        switch (data.license) {
+            case "MIT":
+                data.badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)";
+                data.link = "[MIT](https://opensource.org/licenses/MIT)";
+                break;
+            
+            case "APACHE 2.0":
+                data.badge = "[![License: Apache](https://img.shields.io/badge/License-Apache-yellow.svg)](https://opensource.org/licenses/Apache-2.0)";
+                data.link = "[APACHE 2.0](https://opensource.org/licenses/Apache-2.0)";
+                break;
+                
+            case "GPL 3.0":
+                data.badge = "[![License: GPL](https://img.shields.io/badge/License-GPL-blue.svg)](https://opensource.org/licenses/GPL-3.0)";
+                data.link = "[GPL 3.0](https://opensource.org/licenses/GPL-3.0)";
+                break;
+
+            case "BSD 3":
+                data.badge = "[![License: GPL](https://img.shields.io/badge/License-BSD-red.svg)](https://opensource.org/licenses/BSD-3-Clause)";
+                data.link = "[BSD-3](https://opensource.org/licenses/BSD-3-Clause)";
+                break;
+        }
+
+
+        const readme = generateMarkdown(data);
 
         await writeFileAsync("README.md", readme);
 
@@ -83,8 +105,6 @@ async function init(){
     } catch (error) {
         console.log(error)
     }
-    
-    const readme = response.projectName
     
 };
 
