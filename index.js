@@ -71,9 +71,10 @@ async function init(){
     console.log("Generating README...")
 
     try {
+        // declared the prompt questions in order to access user response
         const data = await inquirer.prompt(questions)
         
-
+        // used switch statement for the license part of readme to link to correct license and passed the license property of the user's response
         switch (data.license) {
             case "MIT":
                 data.badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](https://opensource.org/licenses/MIT)";
@@ -96,9 +97,9 @@ async function init(){
                 break;
         }
 
-
+        // declared the markdown file template and passed data const to fill in template with user responses
         const readme = generateMarkdown(data);
-
+        // readme file gets generated through writeFileAsync const and I passed through the name of file generated and the readme template
         await writeFileAsync("README.md", readme);
 
         console.log("Success!")
@@ -107,5 +108,5 @@ async function init(){
     }
     
 };
-
+// call the init function that begins the process of generating the readme file
 init();
